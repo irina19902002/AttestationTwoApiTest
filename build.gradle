@@ -23,6 +23,7 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-junit5:2.7.0'
 }
 allure {
+    
     version = '2.11.0'
     useJUnit5 {
         version = '2.11.0'

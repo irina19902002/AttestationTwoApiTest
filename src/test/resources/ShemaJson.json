@@ -61,7 +61,7 @@
           "type": "number"
         },
         "temp_max": {
-          "type": "integer"
+          "type": "number"
         },
         "pressure": {
           "type": "integer"
