@@ -1,12 +1,12 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.codehaus.groovy.control.io.FileReaderSource;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
@@ -62,21 +62,25 @@ public class CurrentWeatherDataTest extends BaseTest{
 
            }
     @Test
-    public void shouldGetWeatherWithCityUnknow111() {
-        File file = new File("src/test/resources/1.json");
-        FileReader reader  = new FileReader("src/test/resources/1.json");
+    public void shouldGetWeatherWithCityUnknow111() throws FileNotFoundException {
+        File file = new File("src/test/resources/weather.json");
+        FileReader reader  = new FileReader(file);
         Scanner sc = new Scanner(reader);
         StringBuilder json = new StringBuilder();
         while (sc.hasNextLine()) {
             json.append(sc.nextLine());
-        }
 
+        }
+        System.out.println(json);
+       // System.out.println(json.toString());
         JSONObject jsonObj = new JSONObject(json.toString());
+        System.out.println(jsonObj);
         when()
-                .get("/weather",null,"2172797","35","139","95050", AUTH_KEY )
+                .get("https://api.openweathermap.org/data/2.5/weather?q=London&id=2172797&lat=35&lon=139&zip=95050&units=standard&lang=en&mode=json&appid=a3d9f38cc5a0b4906112af7d6958debc")
                 .then()
                 .log().body()
                 .assertThat()
                 .body(equalTo(jsonObj.toString()));
+
     }
-       }
+    }
