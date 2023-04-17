@@ -1,5 +1,4 @@
 {
-  "coord": 1
-  "lon": "-0.1257",
-  "lat": 51.5085
+  "message": "Nothing to geocode",
+  "cod": "400"
 }
